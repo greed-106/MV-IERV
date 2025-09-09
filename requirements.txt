@@ -1,9 +1,12 @@
-torch==1.8
-numpy==1.19.2
-pytorch_msssim==0.2.1
-tqdm==4.59.0
-torchvision==0.9
-dahuffman==0.4.1
-Pillow==8.4.0
-yaspin==2.1.0
-tensorboard
+# requirements.txt
+# 本文件不包含 torch/torchvision/torchaudio
+# 请先手动安装 PyTorch (CUDA 版本)
+# uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+
+numpy>=1.21.6
+pytorch_msssim>=0.2.1
+tqdm>=4.66.0
+dahuffman>=0.4.1
+Pillow>=9.0.0
+yaspin>=2.1.0
+tensorboard>=2.16.0

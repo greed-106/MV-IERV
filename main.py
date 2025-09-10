@@ -14,6 +14,7 @@ import torch.nn.utils.prune as prune
 import torch.optim as optim
 import torch.utils.data
 import torchvision.transforms as transforms
+import sys
 
 from dataset import *
 from model import *
@@ -87,7 +88,7 @@ def main():
 
     args.warmup = int(args.warmup * args.epochs)
 
-    exp_id = f'{args.dataset}/e{args.epochs}'
+    exp_id = f'e{args.epochs}'
     if args.eval_only:
         exp_id += '_eval'
     elif args.prune_ratio < 1:
@@ -481,10 +482,10 @@ def evaluate(model, val_dataloader, local_rank, args):
         if args.dump_images:
             for batch_ind in range(args.batchSize):
                 full_ind = i * args.batchSize + batch_ind
-                if v == bas_ind: # v not in bas_ind
-                    save_image(output_list[-1][batch_ind], f'{visual_dir}/pred_{full_ind}.png')
-                else:
-                    save_image(frame_buffer[t_idx], f'{visual_dir}/pred_{full_ind}.png') # full_ind
+                # 始终保存模型的实际预测结果
+                save_image(output_list[-1][batch_ind], f'{visual_dir}/pred_{full_ind}.png')
+                
+                # 保存对应的真实值
                 save_image(data[batch_ind], f'{visual_dir}/gt_{full_ind}.png')
 
     model.train()
